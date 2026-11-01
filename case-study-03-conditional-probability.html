@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Case Study 03 — Conditional Probability</title>
+<style>
+:root{--ink:#14213d;--muted:#596579;--line:#dce3ec;--paper:#f4f6f9;--accent:#315b82}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:#273449;font:16px/1.65 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:900px;margin:42px auto;padding:0 22px}.sheet{background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(24px,5vw,54px);box-shadow:0 12px 40px #14213d0d}
+.eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;font-weight:700;color:var(--accent)}
+h1{color:var(--ink);font-size:clamp(2rem,5vw,3.1rem);line-height:1.1;margin:.6rem 0}.subtitle{color:var(--muted);margin-bottom:2.2rem}
+h2{font-size:1.15rem;color:var(--ink);margin:2rem 0 .55rem}p,li{max-width:75ch}strong{color:var(--ink)}
+.callout{background:#eef3f8;border:1px solid #d5dfeb;border-radius:12px;padding:18px 20px}
+table{width:100%;border-collapse:collapse;margin:14px 0 22px;font-size:.93rem}th{background:var(--ink);color:white;text-align:left}
+td,th{padding:12px;border:1px solid var(--line);vertical-align:top}tr:nth-child(even) td{background:#f7f9fb}
+footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.83rem;color:var(--muted)}
+@media(max-width:600px){main{margin:16px auto;padding:0 10px}.sheet{border-radius:12px;padding:22px 18px}table{font-size:.82rem}td,th{padding:8px}}
+</style></head><body><main><article class="sheet">
+<div class="eyebrow">Financial AI Evaluation · Case Study 03</div><h1>Conditional<br>Probability</h1>
+<p class="subtitle">Evaluation category: Probability, Statistical Reasoning &amp; Causal Interpretation</p>
+<h2>1. Scenario</h2>
+<p>A trading dataset contains the following observations: 78% of winning trades occurred after a liquidity sweep, while 32% of losing trades also occurred after a liquidity sweep. An AI system interprets these figures as proof that a liquidity sweep makes a trade highly likely to win.</p>
+<h2>2. Core evaluation question</h2>
+<p>Do the supplied percentages establish the probability of winning after a liquidity sweep? Or has the AI reversed the conditional probability?</p>
+<h2>3. Key probability distinction</h2>
+<p><strong>P(Sweep | Win) = 78%</strong> means that 78% of winning trades had a liquidity sweep beforehand. It describes the frequency of sweeps among winning trades.</p>
+<p><strong>P(Sweep | Loss) = 32%</strong> means that 32% of losing trades had a liquidity sweep beforehand. It describes the frequency of sweeps among losing trades.</p>
+<p><strong>P(Win | Sweep)</strong> is a different quantity: the probability that a trade wins given that a liquidity sweep occurred. This is the conditional probability needed to assess the win likelihood after a sweep.</p>
+<h2>4. Why the AI conclusion is unsupported</h2>
+<p>The AI has treated P(Sweep | Win) as if it were P(Win | Sweep). These probabilities are not interchangeable. The supplied percentages alone do not reveal how often sweeps occur overall, how many trades win or lose, or the win rate among trades that actually had a sweep.</p>
+<h2>5. What information is required?</h2>
+<table><thead><tr><th>Required information</th><th>Why it matters</th></tr></thead><tbody>
+<tr><td>Total number of trades</td><td>Establishes the sample size and context.</td></tr>
+<tr><td>Number of winning and losing trades</td><td>Provides the base rates for wins and losses.</td></tr>
+<tr><td>Number of trades with a sweep</td><td>Shows how common the condition is.</td></tr>
+<tr><td>Wins among sweep trades</td><td>Allows calculation of P(Win | Sweep).</td></tr>
+<tr><td>Comparable no-sweep results</td><td>Helps assess whether the condition adds useful predictive information.</td></tr></tbody></table>
+<h2>6. Further analytical checks</h2>
+<ul><li>Compare P(Win | Sweep) with P(Win | No Sweep), using the same clearly defined dataset.</li>
+<li>Check sample size and uncertainty; small samples can produce unstable percentages.</li>
+<li>Consider confounding variables such as market regime, volatility, session, trend direction and entry confirmation.</li>
+<li>Test the relationship on unseen data before treating it as a reliable trading signal.</li>
+<li>Even a predictive association does not prove that the sweep causes the trade to win.</li></ul>
+<h2>7. Corrected AI assessment</h2>
+<div class="callout">The available figures show that liquidity sweeps were more frequently observed among winning trades than among losing trades in this sample. However, they do not directly establish the probability of a win after a sweep. To evaluate that question, calculate P(Win | Sweep) from the underlying counts, compare it with the no-sweep baseline, assess uncertainty and possible confounders, and validate the result out of sample.</div>
+<h2>8. Evaluation conclusion</h2>
+<p><strong>AI verdict: Incorrect — conditional probability reversal.</strong> The AI confuses P(Sweep | Win) with P(Win | Sweep) and makes an unsupported predictive and causal claim. The correct conclusion is that the supplied figures suggest an association worth testing, but are insufficient to quantify the probability of winning after a sweep.</p>
+<footer>Portfolio transparency: This is an independent educational AI-evaluation case study based on a hypothetical scenario. It is not a paid client project and does not represent verified live trading performance.</footer>
+</article></main></body></html>

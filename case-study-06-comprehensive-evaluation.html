@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Case Study 06 — Comprehensive Financial AI Evaluation</title>
+<style>
+:root{--ink:#14213d;--muted:#596579;--line:#dce3ec;--paper:#f4f6f9;--accent:#315b82}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:#273449;font:16px/1.65 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:960px;margin:42px auto;padding:0 22px}.sheet{background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(24px,5vw,54px);box-shadow:0 12px 40px #14213d0d}
+.eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;font-weight:700;color:var(--accent)}
+h1{color:var(--ink);font-size:clamp(2rem,5vw,3.1rem);line-height:1.1;margin:.6rem 0}.subtitle{color:var(--muted);margin-bottom:2.2rem}
+h2{font-size:1.15rem;color:var(--ink);margin:2rem 0 .55rem}p,li{max-width:82ch}strong{color:var(--ink)}
+.callout{background:#eef3f8;border:1px solid #d5dfeb;border-radius:12px;padding:18px 20px}
+table{width:100%;border-collapse:collapse;margin:14px 0 22px;font-size:.88rem}th{background:var(--ink);color:white;text-align:left}
+td,th{padding:10px;border:1px solid var(--line);vertical-align:top}tr:nth-child(even) td{background:#f7f9fb}
+footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.83rem;color:var(--muted)}
+@media(max-width:650px){main{margin:16px auto;padding:0 10px}.sheet{border-radius:12px;padding:22px 18px}.table-wrap{overflow-x:auto}table{min-width:650px;font-size:.8rem}td,th{padding:8px}}
+</style></head><body><main><article class="sheet">
+<div class="eyebrow">Financial AI Evaluation · Case Study 06</div>
+<h1>Comprehensive Financial<br>AI Evaluation</h1>
+<p class="subtitle">Quantitative Accuracy · Backtesting Integrity · Statistical Validity · Risk Assessment</p>
+<h2>1. Scenario</h2>
+<p>An AI-generated research report evaluates a BTC trading strategy using 3,000 historical trades. It reports a 58% win rate, average winning trade of +1.5R, average losing trade of −1R, gross expectancy of +0.45R per trade, transaction costs of 0.12R per trade, profit factor of 1.65 and maximum drawdown of 12%. The strategy was selected as the best of 80 candidates. The entire dataset was normalized before a random train/test split.</p>
+<h2>2. Executive assessment</h2>
+<p>The report contains a promising headline result, but its reliability is not established. The net expectancy can be recalculated from the stated win/loss assumptions, while the reported profit factor should be reconciled with the implied gross figures. The selection of one strategy from 80 candidates and preprocessing before the split raise important validation concerns.</p>
+<h2>3. Quantitative verification</h2>
+<div class="table-wrap"><table><thead><tr><th>Metric</th><th>Independent calculation</th><th>Assessment</th></tr></thead><tbody>
+<tr><td>Win rate</td><td>58% (given)</td><td>Input metric; needs a clear trade definition.</td></tr>
+<tr><td>Gross expectancy</td><td>(0.58 × 1.5R) − (0.42 × 1R) = +0.45R</td><td>Matches the report.</td></tr>
+<tr><td>Net expectancy</td><td>+0.45R − 0.12R = +0.33R/trade</td><td>Correct under the stated average-cost assumption.</td></tr>
+<tr><td>Expected aggregate net result</td><td>3,000 × 0.33R = +990R</td><td>Conditional arithmetic, not a realized or guaranteed result.</td></tr>
+<tr><td>Implied gross profit factor</td><td>(0.58 × 1.5) ÷ (0.42 × 1) = 2.07</td><td>Does not match the reported PF of 1.65; reconcile definitions/data.</td></tr>
+<tr><td>Maximum drawdown</td><td>12% (reported)</td><td>Cannot be independently verified without the equity curve and calculation method.</td></tr></tbody></table></div>
+<h2>4. Critical methodological findings</h2>
+<p><strong>A. Data leakage:</strong> Normalizing the full dataset before the train/test split allows test-set information to influence preprocessing. Learned transformations must be fitted on training data only and then applied unchanged to later data.</p>
+<p><strong>B. Random time-series split:</strong> For a strategy intended to predict future BTC prices, a random split may mix earlier and later observations across training and testing. Use chronological splits and walk-forward validation. Check overlapping labels and feature windows; random splitting is not automatically proof of direct look-ahead leakage in every possible dataset, but it is generally an unsuitable estimate of future deployment performance.</p>
+<p><strong>C. Multiple testing / selection bias:</strong> The strategy was selected as the best among 80 candidates. The best observed result may be inflated by repeated experimentation. Record all candidates and tuning decisions, and evaluate the selected strategy on a genuinely untouched test period.</p>
+<p><strong>D. Profit-factor inconsistency:</strong> The stated win rate and average win/loss imply a gross profit factor of approximately 2.07, not 1.65, if all figures use the same trade set and R definition. The discrepancy could reflect different aggregation methods, trade subsets, position sizing or costs, but the report must explain it rather than leave it unresolved.</p>
+<p><strong>E. Risk metric limitations:</strong> A 12% maximum drawdown is not enough to characterize risk by itself. The report should disclose the equity curve, drawdown duration, exposure, position sizing, tail losses, leverage and the method used to calculate drawdown.</p>
+<h2>5. Required remediation and validation plan</h2>
+<div class="table-wrap"><table><thead><tr><th>Priority</th><th>Required action</th></tr></thead><tbody>
+<tr><td>1 — Rebuild pipeline</td><td>Create chronological train, validation and untouched test periods; fit normalization only on training data.</td></tr>
+<tr><td>2 — Audit experiments</td><td>Document all 80 strategies, parameter searches and selection criteria; account for multiple testing.</td></tr>
+<tr><td>3 — Reconcile metrics</td><td>Recalculate PF from raw trade-level gross profit/loss and explain the difference from 2.07.</td></tr>
+<tr><td>4 — Recompute net results</td><td>Apply realistic fees, spread, slippage, funding and execution assumptions consistently.</td></tr>
+<tr><td>5 — Validate stability</td><td>Run walk-forward tests across market regimes and compare with simple baselines.</td></tr>
+<tr><td>6 — Forward test</td><td>Paper trade on new data and monitor drift before considering live deployment.</td></tr></tbody></table></div>
+<h2>6. Corrected AI assessment</h2>
+<div class="callout">The strategy shows positive stated net expectancy of +0.33R per trade after the assumed 0.12R cost, and the arithmetic implies +990R over 3,000 trades if those averages apply consistently. However, this is a conditional calculation, not proof of future profitability. The implied gross profit factor of approximately 2.07 conflicts with the reported 1.65 and requires reconciliation. In addition, selecting the best of 80 strategies, fitting normalization on the full dataset, and using a random split weaken the credibility of the reported performance. The model should not be considered validated until these issues are resolved using leakage-free chronological and walk-forward testing.</div>
+<h2>7. Final evaluation verdict</h2>
+<p><strong>AI verdict: Not validated — significant methodological and reporting issues.</strong> The headline expectancy is arithmetically positive under the stated assumptions, but performance reliability remains unproven. The PF discrepancy, data leakage, random split and selection among 80 candidates must be addressed before any claim of robust or live profitability is justified.</p>
+<h2>8. Evaluator's quality checklist</h2>
+<ul><li>Recalculated expectancy and net expectancy.</li><li>Checked the implied profit factor against the reported value.</li><li>Identified preprocessing leakage and time-series validation concerns.</li><li>Identified multiple-testing / selection bias.</li><li>Distinguished arithmetic projections from verified realized performance.</li><li>Proposed concrete remediation and forward validation.</li></ul>
+<footer>Portfolio transparency: This is an independent educational AI-evaluation case study based on a hypothetical scenario. It is not a paid client project and does not represent verified live trading performance.</footer>
+</article></main></body></html>

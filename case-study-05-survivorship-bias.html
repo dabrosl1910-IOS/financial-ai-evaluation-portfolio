@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Case Study 05 — Survivorship Bias</title>
+<style>
+:root{--ink:#14213d;--muted:#596579;--line:#dce3ec;--paper:#f4f6f9;--accent:#315b82}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:#273449;font:16px/1.65 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:900px;margin:42px auto;padding:0 22px}.sheet{background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(24px,5vw,54px);box-shadow:0 12px 40px #14213d0d}
+.eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;font-weight:700;color:var(--accent)}
+h1{color:var(--ink);font-size:clamp(2rem,5vw,3.1rem);line-height:1.1;margin:.6rem 0}.subtitle{color:var(--muted);margin-bottom:2.2rem}
+h2{font-size:1.15rem;color:var(--ink);margin:2rem 0 .55rem}p,li{max-width:75ch}strong{color:var(--ink)}
+.callout{background:#eef3f8;border:1px solid #d5dfeb;border-radius:12px;padding:18px 20px}
+table{width:100%;border-collapse:collapse;margin:14px 0 22px;font-size:.93rem}th{background:var(--ink);color:white;text-align:left}
+td,th{padding:12px;border:1px solid var(--line);vertical-align:top}tr:nth-child(even) td{background:#f7f9fb}
+footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.83rem;color:var(--muted)}
+@media(max-width:600px){main{margin:16px auto;padding:0 10px}.sheet{border-radius:12px;padding:22px 18px}table{font-size:.82rem}td,th{padding:8px}}
+</style></head><body><main><article class="sheet">
+<div class="eyebrow">Financial AI Evaluation · Case Study 05</div><h1>Survivorship Bias</h1>
+<p class="subtitle">Evaluation category: Dataset Integrity, Selection Bias &amp; Performance Reporting</p>
+<h2>1. Scenario</h2>
+<p>A research report evaluates 100 trading strategies that were launched over a historical period. Only the 15 strategies that survived and remained profitable are included in the final performance summary. The report states that the average win rate of these 15 strategies is 68% and concludes that the strategy universe is generally highly effective.</p>
+<h2>2. Core evaluation question</h2>
+<p>Can the performance of the 15 surviving strategies represent the original group of 100, when the 85 excluded strategies may have failed, underperformed or been discontinued?</p>
+<h2>3. Identified evaluation issues</h2>
+<p><strong>Survivorship bias:</strong> The analysis excludes strategies that did not survive. By observing only the winners or survivors, the report creates an overly positive picture of historical performance.</p>
+<p><strong>Selection bias:</strong> The 15 strategies were selected based on their outcome. Their performance is therefore not an unbiased estimate of what would have been expected from the original group of 100 strategies.</p>
+<p><strong>Incomplete reporting:</strong> Reporting only the survivors hides the failure rate, distribution of outcomes, losses and the criteria used to exclude strategies.</p>
+<h2>4. Why the reported 68% average is misleading</h2>
+<p>The 68% win rate describes the selected subset of 15 surviving strategies, not the full population of 100. It cannot be generalized to the original strategy universe without including the excluded strategies and understanding the selection process. The 85 excluded strategies must not automatically be assigned a 0% win rate; their actual records should be recovered and evaluated.</p>
+<h2>5. Recommended evaluation framework</h2>
+<table><thead><tr><th>Requirement</th><th>Evaluation purpose</th></tr></thead><tbody>
+<tr><td>Complete strategy universe</td><td>Include all 100 strategies, including discontinued and losing ones.</td></tr>
+<tr><td>Consistent inclusion rules</td><td>Define eligibility and exclusion criteria before examining outcomes.</td></tr>
+<tr><td>Full outcome distribution</td><td>Report winners, losers, discontinued strategies, returns and drawdowns.</td></tr>
+<tr><td>Selection process disclosure</td><td>Explain when and why the 15 strategies were chosen.</td></tr>
+<tr><td>Out-of-sample validation</td><td>Test whether conclusions hold on unseen data, not just the period used for selection.</td></tr>
+<tr><td>Multiple-testing awareness</td><td>Account for repeated strategy searches and parameter experiments where relevant.</td></tr></tbody></table>
+<h2>6. Additional checks</h2>
+<ul><li>Verify that every strategy in the original group is accounted for, including those with missing records or early termination.</li>
+<li>Avoid calculating a single average without showing dispersion, median, worst outcomes and failure rates.</li>
+<li>Ensure that all strategies are measured over comparable periods and with consistent transaction-cost assumptions.</li>
+<li>Distinguish survivorship bias from related issues such as data snooping and repeated selection of the best-performing strategy.</li></ul>
+<h2>7. Corrected AI assessment</h2>
+<div class="callout">The 68% average win rate applies only to the 15 selected surviving strategies. Since 85 of the original 100 strategies are excluded, the report is affected by survivorship and selection bias. The figure cannot support a conclusion that the broader strategy universe is generally effective. A reliable evaluation requires the complete original set, transparent exclusion rules, consistent performance measurement and validation on data not used for selection.</div>
+<h2>8. Evaluation conclusion</h2>
+<p><strong>AI verdict: Incorrect / materially biased.</strong> The report generalizes from a selected survivor subset to the full strategy universe while omitting most of the original sample. The correct conclusion is that the 15 survivors performed well on the reported measure, but the broader effectiveness of the 100-strategy group remains unknown.</p>
+<footer>Portfolio transparency: This is an independent educational AI-evaluation case study based on a hypothetical scenario. It is not a paid client project and does not represent verified live trading performance.</footer>
+</article></main></body></html>

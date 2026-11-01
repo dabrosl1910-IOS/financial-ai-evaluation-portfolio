@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case Study 01 | Financial AI Evaluation</title>
+<style>
+:root{--ink:#172554;--text:#1e293b;--muted:#64748b;--line:#e2e8f0;--panel:#f8fafc;--good:#166534}
+*{box-sizing:border-box}body{margin:0;background:#f8fafc;color:var(--text);font:16px/1.65 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:900px;margin:48px auto;padding:0 22px}
+header{padding:34px 36px;background:white;border:1px solid var(--line);border-radius:18px}
+.kicker{font-size:12px;letter-spacing:.14em;font-weight:700;color:var(--muted)}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.12;color:var(--ink);margin:12px 0}
+.subtitle{color:var(--muted);margin:0}
+section{background:white;border:1px solid var(--line);border-radius:16px;padding:26px 30px;margin-top:18px}
+h2{font-size:20px;color:var(--ink);margin:0 0 12px}
+.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:22px}
+.meta div{background:var(--panel);padding:13px;border-radius:10px;font-size:14px}
+.meta strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+blockquote{margin:12px 0;padding:14px 18px;border-left:3px solid #94a3b8;background:var(--panel)}
+.math{font-size:20px;font-weight:700;color:var(--good);padding:14px 16px;background:#f0fdf4;border-radius:10px}
+.small{font-size:13px;color:var(--muted)}
+footer{padding:24px 4px;color:var(--muted);font-size:13px}
+@media(max-width:650px){main{margin:20px auto}.meta{grid-template-columns:repeat(2,1fr)}header,section{padding:22px}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="kicker">FINANCIAL AI EVALUATION · CASE STUDY 01</div>
+<h1>Financial Expectancy Evaluation</h1>
+<p class="subtitle">Quantitative reasoning · Mathematical accuracy · Trading performance interpretation</p>
+<div class="meta">
+<div><strong>Dataset</strong>100 hypothetical trades</div>
+<div><strong>Win rate</strong>45%</div>
+<div><strong>Reward / risk</strong>2R / 1R</div>
+<div><strong>Verdict</strong>Incorrect conclusion</div>
+</div>
+</header>
+<section>
+<h2>1. Evaluation objective</h2>
+Assess whether an AI system correctly interprets profitability when a strategy's win rate is below 50% but its average winning trade is larger than its average losing trade.
+</section>
+<section>
+<h2>2. Scenario and AI-generated claim</h2>
+<p><b>Input data:</b> 100 trades; 45 winners; 55 losers; average winning trade +2R; average losing trade −1R.</p>
+<blockquote>“The strategy has a 45% win rate, which means it is unprofitable because the win rate is below 50%.”</blockquote>
+</section>
+<section>
+<h2>3. Independent calculation</h2>
+<p><b>Expectancy</b> = (Win rate × Average win) − (Loss rate × Average loss magnitude)</p>
+<div class="math">E = (0.45 × 2R) − (0.55 × 1R) = +0.35R per trade</div>
+<p><b>Expected aggregate result:</b> 100 × 0.35R = +35R.</p>
+<p class="small">Gross expectancy estimate under the stated assumptions. Excludes commissions, spread, slippage, financing costs, and execution differences.</p>
+</section>
+<section>
+<h2>4. Identified reasoning errors</h2>
+<p><b>Win-rate misinterpretation:</b> The AI assumes that profitability requires a win rate above 50%.</p>
+<p><b>Ignoring reward-to-risk:</b> It fails to account for the size of average wins relative to average losses.</p>
+<p><b>Unsupported conclusion:</b> It labels the strategy unprofitable without calculating expectancy or considering costs.</p>
+</section>
+<section>
+<h2>5. Corrected assessment</h2>
+The supplied figures imply positive gross expectancy of +0.35R per trade. A 45% win rate alone does not justify calling the strategy unprofitable. A complete assessment must account for trading costs and verify that the stated average outcomes are based on a representative sample.
+</section>
+<section>
+<h2>6. Evaluation conclusion</h2>
+<p><b>Verdict: Incorrect.</b> The AI's conclusion is mathematically unsupported. It relies on win rate in isolation and ignores expectancy and reward-to-risk.</p>
+</section>
+<footer>Portfolio transparency: Independently completed educational evaluation using a hypothetical trading scenario. Not a paid client project or a record of live trading performance.</footer>
+</main>
+</body>
+</html>

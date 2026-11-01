@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case Study 02 — Overfitting &amp; Data Snooping</title>
+<style>
+:root{--ink:#14213d;--muted:#596579;--line:#dce3ec;--paper:#f4f6f9;--accent:#315b82}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:#273449;font:16px/1.65 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:900px;margin:42px auto;padding:0 22px}.sheet{background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(24px,5vw,54px);box-shadow:0 12px 40px #14213d0d}
+.eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;font-weight:700;color:var(--accent)}
+h1{color:var(--ink);font-size:clamp(2rem,5vw,3.1rem);line-height:1.1;margin:.6rem 0}
+.subtitle{color:var(--muted);margin-bottom:2.2rem}
+h2{font-size:1.15rem;color:var(--ink);margin:2rem 0 .55rem}
+p,li{max-width:75ch}strong{color:var(--ink)}
+.callout{background:#eef3f8;border:1px solid #d5dfeb;border-radius:12px;padding:18px 20px}
+table{width:100%;border-collapse:collapse;margin:14px 0 22px;font-size:.93rem}
+th{background:var(--ink);color:white;text-align:left}td,th{padding:12px;border:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#f7f9fb}
+footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.83rem;color:var(--muted)}
+@media(max-width:600px){main{margin:16px auto;padding:0 10px}.sheet{border-radius:12px;padding:22px 18px}table{font-size:.82rem}td,th{padding:8px}}
+</style>
+</head>
+<body><main><article class="sheet">
+<div class="eyebrow">Financial AI Evaluation · Case Study 02</div>
+<h1>Overfitting &amp;<br>Data Snooping</h1>
+<p class="subtitle">Evaluation category: Statistical Reasoning &amp; Backtesting Reliability</p>
+
+<h2>1. Scenario</h2>
+<p>An evaluator is given a backtesting summary for 50 trading strategies tested on the same historical dataset. The best-performing strategy reports an 82% win rate, a 3.4 profit factor, 120 trades, and a 4% maximum drawdown. An AI system concludes that the strategy is likely to remain profitable in live trading.</p>
+
+<h2>2. Core evaluation question</h2>
+<p>Does the strongest result among 50 strategies provide reliable evidence of future profitability, or could the result be inflated by repeated experimentation and selection?</p>
+
+<h2>3. Evaluation findings</h2>
+<p><strong>Overfitting:</strong> A strategy may fit historical noise rather than persistent market structure. Its impressive historical metrics may not generalize to unseen data.</p>
+<p><strong>Data snooping / multiple testing:</strong> Testing 50 strategies on the same dataset creates repeated opportunities to find a strong result by chance. Selecting only the best result introduces selection bias and can exaggerate expected performance.</p>
+<p><strong>Unsupported live-performance inference:</strong> A high historical win rate, profit factor, and low drawdown do not by themselves establish that the strategy will work in live markets.</p>
+
+<h2>4. Recommended validation process</h2>
+<table><thead><tr><th>Stage</th><th>Purpose</th></tr></thead><tbody>
+<tr><td>Training / development data</td><td>Develop and tune strategies; do not treat these results as final evidence.</td></tr>
+<tr><td>Validation data</td><td>Compare candidates and make limited design choices without repeatedly reusing the final test set.</td></tr>
+<tr><td>Untouched test data</td><td>Evaluate the selected strategy once on genuinely unseen, chronologically later data.</td></tr>
+<tr><td>Walk-forward testing</td><td>Repeat development and evaluation across sequential time windows to test stability.</td></tr>
+<tr><td>Forward / paper testing</td><td>Observe performance on new market data before risking capital.</td></tr>
+</tbody></table>
+
+<h2>5. Additional checks before trusting the result</h2>
+<ul>
+<li>Include realistic commissions, spread, slippage, funding and execution assumptions.</li>
+<li>Check whether the 120 trades are sufficiently independent and representative; clustered or overlapping trades can make evidence look stronger than it is.</li>
+<li>Review performance across different market regimes and report the full distribution of tested strategies, not only the winner.</li>
+<li>Keep a record of how many variants, parameter combinations and repeated experiments were tried.</li>
+</ul>
+
+<h2>6. Corrected AI assessment</h2>
+<div class="callout">The reported backtest is promising as an exploratory result, but it is not sufficient to conclude that the strategy is likely to remain profitable live. Because 50 strategies were tested on the same historical dataset and only the best result was highlighted, the reported metrics may be affected by overfitting, data snooping and selection bias. The strategy should be assessed using a pre-defined validation process, an untouched chronological test period, walk-forward analysis, realistic trading costs and forward testing.</div>
+
+<h2>7. Evaluation conclusion</h2>
+<p><strong>AI verdict: Incorrect / overconfident.</strong> The AI treats the best in-sample result as strong evidence of live profitability without accounting for multiple testing or out-of-sample validation. The appropriate conclusion is that the strategy requires further testing.</p>
+
+<footer>Portfolio transparency: This is an independent educational AI-evaluation case study based on a hypothetical scenario. It is not a paid client project and does not represent verified live trading performance.</footer>
+</article></main></body></html>
